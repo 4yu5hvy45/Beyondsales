@@ -1,0 +1,646 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Beyond Branding Pitch Playbook</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one app bar with three tabs; Leads = filter row + card grid + slide-in lead panel. */
+:root{
+  --bg:#F4F6F8; --surface:#FFFFFF; --sunk:#EDF0F3; --ink:#111A22; --muted:#5A6672; --faint:#8A949E; --line:#DDE2E7;
+  --accent:#1D4ED8; --accent-soft:#E3EAFC; --on-accent:#FFFFFF; --good:#157F3C; --good-soft:#DFF3E6;
+  --c-open:#C2410C; --c-shelf:#15803D; --c-tender:#6D28D9; --c-integrator:#0E7490; --c-drop:#BE185D;
+  --shadow:0 12px 40px rgba(17,26,34,.16);
+  --f-display:"Bricolage Grotesque","Avenir Next",system-ui,sans-serif;
+  --f-body:"Instrument Sans","Helvetica Neue",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1318; --surface:#161D24; --sunk:#1D252E; --ink:#E6EBF0; --muted:#9AA6B2; --faint:#6E7A86; --line:#28323C;
+  --accent:#86A8FF; --accent-soft:#1E2A47; --on-accent:#0E1318; --good:#4ADE80; --good-soft:#163323;
+  --c-open:#FB8A4E; --c-shelf:#4ADE80; --c-tender:#B197FC; --c-integrator:#3BC9DB; --c-drop:#F783AC;
+  --shadow:0 12px 40px rgba(0,0,0,.5); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1318; --surface:#161D24; --sunk:#1D252E; --ink:#E6EBF0; --muted:#9AA6B2; --faint:#6E7A86; --line:#28323C;
+  --accent:#86A8FF; --accent-soft:#1E2A47; --on-accent:#0E1318; --good:#4ADE80; --good-soft:#163323;
+  --c-open:#FB8A4E; --c-shelf:#4ADE80; --c-tender:#B197FC; --c-integrator:#3BC9DB; --c-drop:#F783AC;
+  --shadow:0 12px 40px rgba(0,0,0,.5); color-scheme:dark}
+*{box-sizing:border-box}
+html,body{background:var(--bg)}
+body{color:var(--ink);font:15px/1.5 var(--f-body);margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--surface)}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance;letter-spacing:-.01em}
+.eyebrow{font:600 11px/1.2 var(--f-body);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.muted{color:var(--muted)}
+
+/* app bar */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+.bar .wrap{display:flex;align-items:center;gap:16px;min-height:60px;flex-wrap:wrap;padding-block:8px}
+.logo{font:800 18px/1 var(--f-display);white-space:nowrap}
+.logo span{color:var(--accent)}
+.tabs{display:flex;gap:2px;background:var(--sunk);border-radius:10px;padding:3px}
+.tabs button{border:0;background:none;padding:7px 14px;border-radius:8px;font-weight:600;font-size:14px;color:var(--muted);cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.who{margin-left:auto;display:flex;align-items:center;gap:8px;font-size:13px}
+.mode{font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:var(--sunk);color:var(--muted);white-space:nowrap}
+.mode.shared{background:var(--good-soft);color:var(--good)}
+.linkbtn{border:0;background:none;color:var(--accent);font-weight:600;cursor:pointer;padding:4px}
+
+main{padding-block:24px 64px}
+.view[hidden]{display:none}
+
+/* intro strip */
+.intro{display:flex;justify-content:space-between;gap:16px;align-items:flex-end;flex-wrap:wrap;margin-bottom:18px}
+.intro h1{font-size:clamp(24px,3.4vw,34px);font-weight:800}
+.intro p{margin:6px 0 0;max-width:60ch}
+.nums{display:flex;gap:22px}
+.nums div{text-align:right}
+.nums b{display:block;font:800 24px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.nums span{font-size:12px;color:var(--muted)}
+
+/* filters */
+.filters{display:flex;flex-direction:column;gap:10px;margin-bottom:16px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-size:13px;font-weight:600;cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.chip i{width:8px;height:8px;border-radius:50%;background:var(--cc,var(--faint));display:inline-block}
+.chip small{font:500 11px/1 var(--f-mono);color:var(--muted)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.chip[aria-pressed="true"] small{color:inherit;opacity:.7}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.row input[type=search],.row select{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:8px 10px;min-width:0}
+.row input[type=search]{flex:1 1 220px}
+
+/* cards */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.card{all:unset;box-sizing:border-box;cursor:pointer;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;min-width:0;position:relative}
+.card::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:3px;border-radius:0 3px 3px 0;background:var(--cc)}
+.card:hover{border-color:var(--cc)}
+.card[aria-current="true"]{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.card .top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.card h3{font-size:17px;font-weight:600;font-family:var(--f-body);letter-spacing:0}
+.card .where{font-size:13px;color:var(--muted)}
+.score{font:500 12px/1 var(--f-mono);padding:5px 7px;border-radius:6px;background:var(--sunk);white-space:nowrap}
+.score.hi{background:var(--good-soft);color:var(--good)}
+.tags{display:flex;gap:6px;flex-wrap:wrap;font-size:12px}
+.tag{padding:2px 8px;border-radius:999px;background:var(--sunk);color:var(--muted);font-weight:600}
+.tag.camp{color:var(--cc);background:color-mix(in srgb,var(--cc) 12%,transparent)}
+.tag.status{background:var(--accent-soft);color:var(--accent)}
+.tag.won{background:var(--good-soft);color:var(--good)}
+.reach{display:flex;gap:10px;font-size:12px;color:var(--faint)}
+.reach span.on{color:var(--ink);font-weight:600}
+.empty{padding:48px 20px;text-align:center;color:var(--muted);border:1px dashed var(--line);border-radius:12px;grid-column:1/-1}
+
+/* panel */
+.scrim{position:fixed;inset:0;background:rgba(10,14,18,.35);z-index:40}
+.panel{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--surface);z-index:41;box-shadow:var(--shadow);display:flex;flex-direction:column;
+  padding-top:env(safe-area-inset-top,0px);padding-right:env(safe-area-inset-right,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.panel header{display:flex;justify-content:space-between;gap:12px;padding:18px 20px 14px;border-bottom:1px solid var(--line)}
+.panel header h2{font-size:24px;font-weight:800}
+.close{border:1px solid var(--line);background:var(--surface);border-radius:8px;width:36px;height:36px;cursor:pointer;font-size:18px;line-height:1;flex:none}
+.pbody{overflow:auto;padding:4px 20px 28px;flex:1}
+.step{padding-block:18px;border-bottom:1px solid var(--line);display:flex;flex-direction:column;gap:12px}
+.step:last-child{border-bottom:0}
+.step h3{font-size:15px;font-family:var(--f-body);font-weight:600;display:flex;gap:10px;align-items:center;letter-spacing:0}
+.step h3 b{font:500 11px/1 var(--f-mono);background:var(--ink);color:var(--surface);border-radius:999px;width:22px;height:22px;display:inline-grid;place-items:center}
+.contacts{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:8px 12px;align-items:center;font-size:14px}
+.contacts dt{color:var(--muted);font-size:13px}
+.contacts dd{margin:0;overflow-wrap:anywhere;min-width:0}
+.contacts .nf{color:var(--faint);font-style:italic}
+.mini{border:1px solid var(--line);background:var(--surface);border-radius:6px;font-size:12px;font-weight:600;padding:4px 8px;cursor:pointer;white-space:nowrap}
+.pitch{background:var(--sunk);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;font-size:14px}
+.pitch .hook{font:600 17px/1.3 var(--f-display);border-left:3px solid var(--cc);padding-left:10px}
+.pitch dl{display:grid;grid-template-columns:92px minmax(0,1fr);gap:4px 12px;margin:0}
+.pitch dt{color:var(--muted)}
+.pitch dd{margin:0}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fields label{display:flex;flex-direction:column;gap:4px;font-size:12px;font-weight:600;color:var(--muted);min-width:0}
+.fields .wide{grid-column:1/-1}
+.fields input,.fields select,.fields textarea{border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:8px 10px;font-size:14px;font-weight:400;color:var(--ink);min-width:0;width:100%}
+.seg{display:flex;gap:4px;flex-wrap:wrap}
+.seg button{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:6px 10px;font-size:13px;font-weight:600;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--surface);border-color:var(--ink)}
+.subj{font:500 13px/1.4 var(--f-mono);border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--bg);flex:1;min-width:0}
+textarea.msg{font:400 13.5px/1.6 var(--f-mono);min-height:230px;resize:vertical;border:1px solid var(--line);border-radius:10px;padding:12px;background:var(--bg);width:100%}
+.btn{border:0;background:var(--accent);color:var(--on-accent);font-weight:600;border-radius:8px;padding:9px 14px;cursor:pointer}
+.btn.ghost{background:var(--surface);color:var(--ink);border:1px solid var(--line)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.ok{font-size:13px;color:var(--good);font-weight:600}
+.small{font-size:12.5px}
+details summary{cursor:pointer;font-weight:600;font-size:14px}
+details ul,details ol{margin:8px 0 0;padding-left:20px;font-size:14px}
+
+/* how it works */
+.flow{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border:1px solid var(--line);border-radius:12px;background:var(--surface);overflow:hidden;margin-top:16px}
+.flow div{padding:16px;border-right:1px solid var(--line);min-width:0}
+.flow div:last-child{border-right:0}
+.flow b{font:500 12px/1 var(--f-mono);color:var(--accent)}
+.flow h3{font-size:16px;margin:8px 0 4px}
+.flow p{margin:0;font-size:13.5px;color:var(--muted)}
+@media (max-width:900px){.flow{grid-template-columns:1fr 1fr}.flow div{border-bottom:1px solid var(--line)}.flow div:nth-child(2n){border-right:0}}
+@media (max-width:480px){.flow{grid-template-columns:1fr}.flow div{border-right:0}}
+.tablewrap{overflow-x:auto;margin-top:16px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:14px}
+th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;color:var(--muted);font-weight:600;background:var(--sunk)}
+tr:last-child td{border-bottom:0}
+td .dot{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--cc);margin-right:6px}
+.mono{font:500 12.5px/1.4 var(--f-mono)}
+.sec{margin-top:36px}
+.sec > p{max-width:65ch;margin:6px 0 0}
+
+/* find leads */
+.week{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;margin-top:16px}
+.week div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;min-width:0}
+.week b{font-family:var(--f-display);font-size:15px}
+.week p{margin:6px 0 0;font-size:13.5px;color:var(--muted)}
+@media (max-width:900px){.week{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.week{grid-template-columns:1fr}}
+.sources{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin-top:16px}
+.src{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--cc);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.src h3{font-size:16px}
+.q{display:flex;gap:8px;align-items:flex-start}
+.q code{flex:1;font:400 12.5px/1.5 var(--f-mono);background:var(--sunk);padding:6px 8px;border-radius:6px;overflow-wrap:anywhere;min-width:0}
+.addbox{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;margin-top:16px;display:flex;flex-direction:column;gap:14px}
+.addbox .fields{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:760px){.addbox .fields,.fields{grid-template-columns:1fr}.contacts{grid-template-columns:80px minmax(0,1fr) auto}}
+.scoreout{font:800 30px/1 var(--f-display)}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+footer{font-size:12.5px;color:var(--muted);padding-block:24px;border-top:1px solid var(--line)}
+
+/* sign-in */
+.signin{max-width:420px;margin:48px auto;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:12px}
+.signin input{border:1px solid var(--line);background:var(--bg);border-radius:8px;padding:10px 12px}
+@media (prefers-reduced-motion:no-preference){.panel{animation:slide .18s ease-out}@keyframes slide{from{transform:translateX(24px);opacity:.6}to{transform:none;opacity:1}}}
+</style>
+<style>[hidden]{display:none!important}img{max-width:100%}</style>
+</head>
+<body>
+
+
+<div class="bar"><div class="wrap">
+  <div class="logo" id="logo">Beyond Branding <span>Playbook</span></div>
+  <div class="tabs" role="tablist">
+    <button role="tab" data-view="leads" aria-selected="true">Leads</button>
+    <button role="tab" data-view="how" aria-selected="false">How it works</button>
+    <button role="tab" data-view="find" aria-selected="false">Find leads</button>
+  </div>
+  <div class="who"><span class="mode" id="mode">Loading…</span><span id="userbox"></span></div>
+</div></div>
+
+<main class="wrap">
+  <!-- LEADS -->
+  <section class="view" id="v-leads">
+    <div class="intro">
+      <div><h1>Who to pitch this week</h1><p class="muted">Click a business to see how to reach them, what to offer, and a message you can copy.</p></div>
+      <div class="nums"><div><b id="n-total">–</b><span>leads</span></div><div><b id="n-open">–</b><span>unclaimed</span></div><div><b id="n-active">–</b><span>in progress</span></div><div><b id="n-won">–</b><span>won</span></div></div>
+    </div>
+    <div class="filters">
+      <div class="chips" id="campchips"></div>
+      <div class="row">
+        <input type="search" id="q" placeholder="Search business, city or person" aria-label="Search">
+        <select id="f-track" aria-label="Track"><option value="">Both tracks</option><option value="Sample-first">Sample-first</option><option value="Mass">Mass</option></select>
+        <select id="f-status" aria-label="Status"><option value="">Any status</option></select>
+        <select id="f-country" aria-label="Country"><option value="">All countries</option><option value="UK">UK</option><option value="US">US</option><option value="IE">Ireland</option></select>
+      </div>
+    </div>
+    <div class="grid" id="grid"><div class="empty">Loading leads…</div></div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="view" id="v-how" hidden>
+    <div class="intro"><div><h1>How a lead becomes a client</h1><p class="muted">The same six steps for every lead, whether you or a partner works it.</p></div></div>
+    <div class="flow">
+      <div><b>1 · Mon</b><h3>Find</h3><p>Use the sources in "Find leads". Add businesses opened in the last 12 months.</p></div>
+      <div><b>2</b><h3>Score</h3><p>Fit + need + timing, 0–2 each. 5–6 is sample-first, 4 is mass, 3 or less waits.</p></div>
+      <div><b>3</b><h3>Claim</h3><p>A partner claims it and gets 14 days of exclusivity. Log every touch.</p></div>
+      <div><b>4</b><h3>Reach out</h3><p>Use the channel on the lead, and the message the app writes for it.</p></div>
+      <div><b>5 · 48 h</b><h3>Sample or offer</h3><p>Sample-first: call, then a 2-hour sample. Mass: the fixed-price offer.</p></div>
+      <div><b>6</b><h3>Close</h3><p>Present the sample live, send the 50% deposit link the same day.</p></div>
+    </div>
+    <div class="sec"><h2>What we pitch</h2><p class="muted">One campaign per lead. Prices are starting points; the studio approves any discount.</p>
+      <div class="tablewrap"><table><thead><tr><th>Campaign</th><th>For</th><th>Hook</th><th>Free sample</th><th>Entry offer</th><th>Full service</th></tr></thead><tbody id="camptable"></tbody></table></div>
+    </div>
+    <div class="sec"><h2>Partner rules</h2>
+      <div class="tablewrap"><table style="min-width:560px"><thead><tr><th>Role</th><th>What they do</th><th>First project</th><th>Repeat work, 12 months</th></tr></thead><tbody>
+        <tr><td><b>Referrer</b></td><td>Introduces someone from their own network</td><td class="mono">10%</td><td class="mono">5%</td></tr>
+        <tr><td><b>Closer</b></td><td>Claims a lead here, pitches it, gets the deposit paid</td><td class="mono">20%</td><td class="mono">10%</td></tr>
+        <tr><td><b>Own-lead closer</b></td><td>Brings their own lead and closes it</td><td class="mono">25%</td><td class="mono">10%</td></tr>
+      </tbody></table></div>
+      <p class="muted small" style="margin-top:10px">Paid on money collected, within 7 days. Clients contract and pay Beyond Branding directly. Pitch only the listed campaigns and prices, and say up front that you work with Beyond Branding.</p>
+    </div>
+  </section>
+
+  <!-- FIND LEADS -->
+  <section class="view" id="v-find" hidden>
+    <div class="intro"><div><h1>Find new leads every week</h1><p class="muted">Two hours a week keeps 20–30 fresh, scored leads on the board.</p></div></div>
+    <div class="week">
+      <div><b>Monday</b><p>Run the searches below for two campaigns. Shortlist about 30 businesses.</p></div>
+      <div><b>Tuesday</b><p>Look up each one's Instagram, website, phone, email and owner. Score it and add it.</p></div>
+      <div><b>Wednesday</b><p>Partners claim leads and send first messages.</p></div>
+      <div><b>Thursday</b><p>Discovery calls. The studio makes the samples that were booked.</p></div>
+      <div><b>Friday</b><p>Follow-ups, update statuses, release stale claims.</p></div>
+    </div>
+    <div class="sec"><h2>Where to look</h2><div class="sources" id="sources"></div></div>
+    <div class="sec"><h2>Add a lead</h2>
+      <form class="addbox" id="addform" novalidate>
+        <div class="fields">
+          <label>Business name *<input id="a-name"></label>
+          <label>Area, city<input id="a-where" placeholder="Shoreditch, London"></label>
+          <label>Country<select id="a-country"><option>UK</option><option>US</option><option value="IE">Ireland</option></select></label>
+          <label>Campaign<select id="a-camp"></select></label>
+          <label class="wide" style="grid-column:span 2">What happened, and when<input id="a-what" placeholder="Opened second site, Oct 2026"></label>
+          <label>Instagram handle<input id="a-ig" placeholder="without the @"></label>
+          <label>Website<input id="a-web" placeholder="example.com"></label>
+          <label>Phone<input id="a-phone"></label>
+          <label>Email<input id="a-email" type="email"></label>
+          <label>Contact person<input id="a-cname" placeholder="Full name"></label>
+          <label>Their role<input id="a-crole" placeholder="Founder"></label>
+          <label>First message via<select id="a-touch"><option>Instagram DM</option><option>Email</option><option>LinkedIn</option><option>Phone / walk-in</option></select></label>
+          <label class="wide" style="grid-column:span 2">Source link<input id="a-src" placeholder="https://…"></label>
+          <label class="wide" style="grid-column:1/-1">Pitch angle: one specific thing you noticed<textarea id="a-angle" rows="2" placeholder="there's no website, so people can't find the menu or book"></textarea></label>
+          <label>Fit<select id="a-fit"><option value="2">2: niche we've proven</option><option value="1">1: close to it</option><option value="0">0: outside</option></select></label>
+          <label>Need<select id="a-need"><option value="2">2: no site or weak brand</option><option value="1" selected>1: some gaps</option><option value="0">0: already strong</option></select></label>
+          <label>Timing<select id="a-time"><option value="2">2: opened ≤ 3 months ago</option><option value="1">1: 3–12 months</option><option value="0">0: older</option></select></label>
+        </div>
+        <div class="row" style="justify-content:space-between">
+          <div class="row" style="gap:16px"><div><div class="eyebrow">Score</div><div class="scoreout" id="a-score">5</div></div><div><div class="eyebrow">Track</div><b id="a-track">Sample-first</b></div></div>
+          <div class="row"><span class="ok" id="a-msg" role="status"></span><button class="btn" type="submit">Add to the board</button></div>
+        </div>
+      </form>
+      <div class="toolbar" id="localtools" hidden>
+        <button class="btn ghost" type="button" id="exportbtn">Export leads (JSON)</button>
+        <label class="btn ghost" style="cursor:pointer">Import leads (JSON)<input type="file" id="importfile" accept="application/json" hidden></label>
+        <button class="btn ghost" type="button" id="resetbtn">Reset to the starting 35</button>
+        <span class="ok" id="localmsg" role="status"></span>
+      </div>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap" id="foot">Contacts for the first 35 leads were checked on 26 Oct 2026 from public listings. "Not found" means we couldn't find it in public sources. Check their website's contact page or Instagram bio before writing.</div></footer>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="panel" id="panel" hidden aria-label="Lead details"></aside>
+
+<script src="config.js"></script>
+<script src="leads.js"></script>
+<script>
+(() => {
+const CFG = Object.assign({studioName:"Beyond Branding", studioSite:"thebeyondbranding.com", founderName:"Ayush", supabaseUrl:"", supabaseAnonKey:""}, window.BB_CONFIG || {});
+const SEED = Array.isArray(window.BB_SEED) ? window.BB_SEED : [];
+
+const CAMPAIGNS = {
+  open: {name:"Open Doors", color:"--c-open", forWho:"New cafés, restaurants, bars, bakeries", hook:"Your launch buzz is wasted if people can't find the menu or book.",
+    sampleShort:"homepage", sampleName:"Homepage mock-up", sampleDetail:"One desktop and one phone screen with their real menu, photos and a Book button.",
+    entry:"Launch site, 5 pages, 2 weeks: from £1,500", full:"Identity + menu + signage + site: £3,500–£6,000",
+    proof:"we recently built the brand and site for Clicks & Brews, a boutique stay and café brand",
+    angle:"people who find you on Instagram have nowhere to check the menu, hours or book",
+    questions:["Where do most new customers find you now?","What do people DM you about most?","Is a second site or delivery planned?"]},
+  shelf: {name:"Shelf Ready", color:"--c-shelf", forWho:"New food, drink, beauty and DTC brands", hook:"Your packaging is the ad on the shelf.",
+    sampleShort:"pack front", sampleName:"One pack-front redesign", sampleDetail:"One SKU redrawn and shown on a shelf next to two real competitors.",
+    entry:"Label system for 3 SKUs: from £1,200", full:"Packaging range + Shopify product pages: £3,000–£8,000",
+    proof:"we designed the tin and label range for Krozzon, a bakery brand",
+    angle:"the moment you go into new stockists, the pack has to win against brands with much bigger budgets",
+    questions:["Which retailers are next?","What do shoppers misunderstand about the product?","How many SKUs in the next 12 months?"]},
+  tender: {name:"Tender Ready", color:"--c-tender", forWho:"New construction, fit-out and trade firms", hook:"Main contractors check your site before they shortlist you.",
+    sampleShort:"capability homepage", sampleName:"Capability homepage mock-up", sampleDetail:"Sectors, accreditations, three project tiles and a 'request capability statement' button.",
+    entry:"Credibility site + capability PDF: from £2,500", full:"Identity + site + case studies: £5,000–£9,000",
+    proof:"we built the brand and website for ESPERTI, a fit-out firm working across Ireland, the UK and the EU",
+    angle:"contractors and clients look you up before they shortlist, and the site is your first tender document",
+    questions:["Which contractors or sectors do you want work from?","What accreditations do you hold?","Do you have photos of finished projects?"]},
+  integrator: {name:"Integrator Upgrade", color:"--c-integrator", forWho:"New AV, smart-home and security installers", hook:"High-end clients buy from the installer whose site looks like the install.",
+    sampleShort:"project page", sampleName:"Project gallery page mock-up", sampleDetail:"One real install as a page: hero still, kit list, before/after, client quote.",
+    entry:"Portfolio site with video hero: from £2,500", full:"Identity + site + project reels: £5,000–£8,000",
+    proof:"we recently built the brand, website and reels for Soul AV, a UK audio-visual integrator",
+    angle:"clients spending five figures on AV judge you on how polished you look online",
+    questions:["What size of project do you want more of?","Do you film your installs?","Who refers work to you?"]},
+  drop: {name:"Drop Launch", color:"--c-drop", forWho:"New streetwear and fashion labels", hook:"Your first drop needs a reel, not a catalogue.",
+    sampleShort:"product reel", sampleName:"10-second product reel", sampleDetail:"One piece turned into a vertical reel from their product photos, with a logo end card.",
+    entry:"Launch reel pack, 3 reels: from £900", full:"Brand + Shopify site + reel campaign: £4,000–£7,000",
+    proof:"we've made launch reels and sites for fashion clients like Drape Society and Manek",
+    angle:"a limited drop sells on hype, and short reels turn followers into a sell-out",
+    questions:["When is the next drop, and how many units?","Where do sales come from now?","Do you have product photos?"]}
+};
+const ORDER = ["open","shelf","tender","integrator","drop"];
+const STATUSES = ["Unclaimed","Claimed","Contacted","Call booked","Sample sent","Won","Lost","House"];
+const SOURCES = {
+  open:[["Monthly roundups","The Caterer new openings · Hot Dinners · Manchester's Finest · Brooklyn Bridge Parents · The Infatuation 'new restaurants'"],
+        ["Google","\"now open\" OR \"new opening\" café OR restaurant Manchester October 2026"],
+        ["Instagram","#nowopen #softopening #newinlondon #brooklynfood"],
+        ["Contacts","The Infatuation and Manchester's Finest listings show website, phone and Instagram"]],
+  shelf:[["Trade news","BevNET press releases · Grocery Gazette · Talking Retail · FoodNavigator"],
+         ["Google","\"launches\" OR \"debuts\" new snack OR drink brand UK 2026 founder"],
+         ["Signals","Fortnum & Mason or Whole Foods new makers · Kickstarter food · Dragons' Den"],
+         ["Contacts","Press releases name founders, the website and the Instagram handle"]],
+  tender:[["Companies House","Advanced search: active Ltd, incorporated 3–12 months ago, download the CSV"],
+          ["Industry codes (SIC)","43320 joinery · 43330 floor and wall · 43390 finishing · 41201 commercial building"],
+          ["Google","\"fit-out\" OR \"interiors\" new company 2026 site:linkedin.com"],
+          ["Contacts","Directors are named on Companies House; find them on LinkedIn"]],
+  integrator:[["Industry codes (SIC)","43210 electrical installation · 43290 other installation · 80200 security systems"],
+              ["Google","\"smart home\" OR \"home cinema\" installer \"established 2025\" OR \"established 2026\""],
+              ["Directories","CEDIA member finder · Houzz new pros · Checkatrade new members"],
+              ["Contacts","Directory profiles usually show phone and website"]],
+  drop:[["Trade news","FashionUnited \"launches\" · Drapers new brands · Hypebeast new labels"],
+        ["Instagram","#drop001 #firstdrop #newstreetwearbrand"],
+        ["Google","site:myshopify.com streetwear \"drop 001\" OR \"coming soon\""],
+        ["Contacts","Instagram bio email, or the founder on LinkedIn"]]
+};
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const ls = {get(k,d){try{const v=localStorage.getItem(k);return v==null?d:v}catch(e){return d}}, set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+const cap = s => s ? s.charAt(0).toUpperCase()+s.slice(1) : s;
+const lc = s => s ? s.charAt(0).toLowerCase()+s.slice(1) : s;
+const today = () => new Date().toISOString().slice(0,10);
+function flash(el, msg){ if(!el) return; el.textContent = msg; clearTimeout(el._t); el._t = setTimeout(()=>el.textContent="", 2400); }
+async function copyText(text, fallbackEl){ try{ await navigator.clipboard.writeText(text); return true; } catch(e){ if(fallbackEl){ fallbackEl.focus(); fallbackEl.select && fallbackEl.select(); } return false; } }
+
+/* ============ storage: one interface, three back ends ============ */
+let store = null, leads = [], canWrite = true, selected = null;
+const me = {name: ls.get("bb-name", CFG.founderName), role: ls.get("bb-role","founder"), address: ls.get("bb-addr","")};
+function setLeads(list){ leads = list.slice().sort((a,b)=>(b.score||0)-(a.score||0) || String(a.name).localeCompare(String(b.name))); renderAll(); }
+
+// 1) Inside claude.ai: the artifact's shared database
+async function artifactStore(){
+  if(!(window.claude && window.claude.use)) return null;
+  let db = null; try{ db = await window.claude.use("db"); }catch(e){}
+  if(!db) return null;
+  try{ const user = await window.claude.use("user"); if(user){ const w = await user.can("data.write"); if(w===false) canWrite=false; } }catch(e){}
+  return {
+    label:"Shared", shared:true,
+    start(){ db.collection("leads").onSnapshot(s => setLeads(s.docs.map(d => ({...d.data(), id:d.id}))), e => showGridMsg("Couldn't load the board ("+e.code+"). Reload to try again.")); },
+    async update(id, patch){ await db.collection("leads").doc(id).update(patch); },
+    async add(doc){ const {id, ...rest} = doc; await db.collection("leads").doc(id).set(rest); }
+  };
+}
+// 2) Hosted with Supabase: shared, sign-in by email link
+function loadScript(src){ return new Promise((res,rej)=>{ const s=document.createElement("script"); s.src=src; s.onload=res; s.onerror=()=>rej(new Error("Couldn't load "+src)); document.head.appendChild(s); }); }
+async function supabaseStore(){
+  if(!(CFG.supabaseUrl && CFG.supabaseAnonKey)) return null;
+  await loadScript("https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js");
+  const sb = window.supabase.createClient(CFG.supabaseUrl, CFG.supabaseAnonKey);
+  const {data:{session}} = await sb.auth.getSession();
+  if(!session){ showSignIn(sb); return "signin"; }
+  $("#userbox").innerHTML = `<span class="muted">${esc(session.user.email)}</span> <button class="linkbtn" id="signout">Sign out</button>`;
+  $("#signout").onclick = async () => { await sb.auth.signOut(); location.reload(); };
+  const load = async () => { const {data, error} = await sb.from("leads").select("id,data"); if(error){ showGridMsg("Couldn't load leads: "+error.message); return; } setLeads(data.map(r => ({...r.data, id:r.id}))); };
+  return {
+    label:"Shared", shared:true,
+    start(){ load(); sb.channel("leads-live").on("postgres_changes",{event:"*",schema:"public",table:"leads"}, () => load()).subscribe(); },
+    async update(id, patch){ const cur = leads.find(l=>l.id===id) || {}; const {id:_, ...rest} = {...cur, ...patch};
+      const {error} = await sb.from("leads").update({data:rest, updated_at:new Date().toISOString()}).eq("id", id); if(error) throw error; await load(); },
+    async add(doc){ const {id, ...rest} = doc; const {error} = await sb.from("leads").insert({id, data:rest}); if(error) throw error; await load(); }
+  };
+}
+// 3) Local: this browser only
+function localStore(){
+  const KEY = "bb-leads-v2";
+  const read = () => { try{ const v = JSON.parse(localStorage.getItem(KEY)); if(Array.isArray(v)) return v; }catch(e){} return SEED.map(x=>({...x})); };
+  const write = list => { try{ localStorage.setItem(KEY, JSON.stringify(list)); }catch(e){} };
+  let list = read();
+  $("#localtools").hidden = false;
+  return {
+    label:"Local · this browser only", shared:false,
+    start(){ setLeads(list); },
+    async update(id, patch){ list = list.map(l => l.id===id ? {...l, ...patch} : l); write(list); setLeads(list); },
+    async add(doc){ list = [...list, doc]; write(list); setLeads(list); },
+    exportJSON(){ return JSON.stringify(list, null, 1); },
+    importJSON(arr){ list = arr; write(list); setLeads(list); },
+    reset(){ list = SEED.map(x=>({...x})); write(list); setLeads(list); }
+  };
+}
+function showGridMsg(m){ $("#grid").innerHTML = `<div class="empty">${esc(m)}</div>`; }
+function showSignIn(sb){
+  $("#mode").textContent = "Shared · sign in";
+  document.querySelectorAll(".view").forEach(v=>v.hidden=true);
+  const box = document.createElement("div"); box.className="signin";
+  box.innerHTML = `<h2>Sign in</h2><p class="muted" style="margin:0">Enter the email the studio invited. We'll send you a sign-in link.</p>
+    <input type="email" id="si-email" placeholder="you@company.com" autocomplete="email"><button class="btn" id="si-go">Email me a sign-in link</button><span class="ok" id="si-msg" role="status"></span>`;
+  $("main").appendChild(box);
+  $("#si-go").onclick = async () => { const email = $("#si-email").value.trim(); if(!email){ flash($("#si-msg"),"Enter your email first."); return; }
+    const {error} = await sb.auth.signInWithOtp({email, options:{emailRedirectTo: location.origin + location.pathname, shouldCreateUser:false}});
+    $("#si-msg").style.color = error ? "var(--c-open)" : ""; $("#si-msg").textContent = error ? (error.message.includes("Signups not allowed") ? "This email hasn't been invited yet. Ask the studio to invite you." : error.message) : "Check your inbox for the sign-in link."; };
+}
+
+/* ============ rendering ============ */
+let fCamp = "";
+function renderAll(){ renderNums(); renderChips(); renderGrid(); if(selected) renderPanel(); }
+function renderNums(){
+  $("#n-total").textContent = leads.length;
+  $("#n-open").textContent = leads.filter(l=>!l.status||l.status==="Unclaimed").length;
+  $("#n-active").textContent = leads.filter(l=>["Claimed","Contacted","Call booked","Sample sent"].includes(l.status)).length;
+  $("#n-won").textContent = leads.filter(l=>l.status==="Won").length;
+}
+function renderChips(){
+  const count = k => leads.filter(l=>l.campaign===k).length;
+  $("#campchips").innerHTML = `<button class="chip" data-c="" aria-pressed="${fCamp===""}">All <small>${leads.length}</small></button>` +
+    ORDER.map(k=>`<button class="chip" data-c="${k}" style="--cc:var(${CAMPAIGNS[k].color})" aria-pressed="${fCamp===k}"><i></i>${CAMPAIGNS[k].name} <small>${count(k)}</small></button>`).join("");
+}
+function visible(){
+  const q = $("#q").value.trim().toLowerCase(), t = $("#f-track").value, s = $("#f-status").value, c = $("#f-country").value;
+  return leads.filter(l => (!fCamp||l.campaign===fCamp) && (!t||l.track===t) && (!s||(l.status||"Unclaimed")===s) && (!c||l.country===c) &&
+    (!q || [l.name,l.where,l.contactName,l.what,l.partner].join(" ").toLowerCase().includes(q)));
+}
+function renderGrid(){
+  if(!leads.length){ showGridMsg("No leads yet. Add the first one in Find leads."); return; }
+  const L = visible();
+  if(!L.length){ showGridMsg("No leads match these filters."); return; }
+  $("#grid").innerHTML = L.map(l => { const c = CAMPAIGNS[l.campaign]||CAMPAIGNS.open, st = l.status||"Unclaimed";
+    return `<button class="card" data-id="${esc(l.id)}" style="--cc:var(${c.color})" aria-current="${selected===l.id}">
+      <div class="top"><div><h3>${esc(l.name)}</h3><div class="where">${esc(l.where)}</div></div><span class="score ${l.score>=6?"hi":""}">${esc(l.score)}/6</span></div>
+      <div class="tags"><span class="tag camp">${esc(c.name)}</span><span class="tag">${esc(l.track)}</span>${st!=="Unclaimed"?`<span class="tag ${st==="Won"?"won":"status"}">${esc(st)}${l.partner?" · "+esc(l.partner):""}</span>`:""}</div>
+      <div class="reach"><span class="${l.instagram?"on":""}">Instagram</span><span class="${l.website?"on":""}">Website</span><span class="${l.phone?"on":""}">Phone</span><span class="${l.email?"on":""}">Email</span></div>
+    </button>`; }).join("");
+}
+
+/* ============ messages ============ */
+function vars(l){
+  const c = CAMPAIGNS[l.campaign]||CAMPAIGNS.open, p = draft[l.id]||{};
+  const first = (p.first ?? (l.contactName ? l.contactName.split(/[ ,&(]/)[0] : "")).trim() || "there";
+  const angle = ((p.angle ?? l.angle) || c.angle).trim().replace(/\.$/,"");
+  const partner = me.role === "partner", who = me.name || (partner ? "[your name]" : CFG.founderName);
+  return {c, first, angle, biz:l.name, who,
+    intro: partner ? `I work with ${CFG.studioName}, a design studio for new businesses` : `I run ${CFG.studioName}, a design studio for new businesses`,
+    sign: `${who}\n${partner ? "Partner, " : ""}${CFG.studioName} · ${CFG.studioSite}`,
+    addr: me.address || "[your business postal address]"};
+}
+const price = s => s.split(":").slice(1).join(":").trim(), offerName = s => lc(s.split(":")[0]);
+function messages(l){
+  const v = vars(l), c = v.c, sf = l.track !== "Mass";
+  return [
+    {k:"dm", label:"Instagram DM", text: sf
+      ? `Hi ${v.first}! Congrats on ${v.biz}. ${cap(v.angle)}.\n\n${v.intro}, and ${c.proof}.\n\nI had an idea for a ${c.sampleShort} for ${v.biz}. Could I ask you 2–3 quick questions and then send you a free mock-up? No strings.\n\n${v.who}`
+      : `Hi ${v.first}! Congrats on ${v.biz}. ${cap(v.angle)}.\n\n${v.intro}, and ${c.proof}. We have a fixed-price offer for exactly this stage: ${offerName(c.entry)}, ${price(c.entry)}.\n\nWant me to send a couple of examples?\n\n${v.who}`},
+    {k:"email", label:"Email", subject: sf ? `${v.biz}: an idea for your ${c.sampleShort}` : `${v.biz}'s launch`, text:
+      `Hi ${v.first},\n\nCongrats on ${v.biz}. ${cap(v.angle)}.\n\n${v.intro}, and ${c.proof}.\n\n${sf ? `I'd like to make you a free ${c.sampleShort} mock-up, so you can see the idea rather than read about it. Could we do a 15-minute call this week so I get the details right?` : `For businesses at your stage we offer ${offerName(c.entry)}, ${price(c.entry)}. Would a 15-minute call to see if it fits be useful?`}\n\n${v.sign}\n\n—\n${v.addr}\nNot relevant? Reply "no" and I won't email again.`},
+    {k:"li", label:"LinkedIn", text: `Hi ${v.first}, congrats on ${v.biz}. ${me.role==="partner"?"I work with":"I run"} a studio that builds brands and websites for new businesses, and I had an idea for your ${c.sampleShort}. Would love to connect.`},
+    {k:"f1", label:"Follow-up 1", text: `Hi ${v.first}, a quick follow-up on ${v.biz}. The first thing I'd do: ${lc(c.sampleDetail)}\n\nHappy to show you what that looks like. ${sf?"Free, no obligation.":"It's part of our "+offerName(c.entry)+"."}\n\n${v.who}`},
+    {k:"f2", label:"Follow-up 2", text: `Hi ${v.first}, I'll close the loop so I'm not crowding your inbox. If the ${c.sampleShort} idea is useful later, just reply and I'll pick it up. Good luck with ${v.biz}!\n\n${v.who}`},
+    {k:"sample", label:"Send sample", text: `Hi ${v.first}, here's the ${lc(c.sampleName)} for ${v.biz} we talked about: [link]\n\nIt's built around what you told me on the call. To take it further, our ${offerName(c.entry)} is ${price(c.entry)}, and the full ${offerName(c.full)} is ${price(c.full)}. We start with a 50% deposit, and I can hold a start date for this week.\n\nWhat would you change?\n\n${v.who}`},
+    {k:"call", label:"Call script", text: `15-MINUTE CALL · ${v.biz}\n\n1. Open: "Thanks for the time. I noticed ${v.angle}."\n2. Ask:\n${c.questions.map(q=>"   - "+q).join("\n")}\n3. Listen for budget, deadline, and who else decides.\n4. Offer: "Let me make you a free ${c.sampleShort} mock-up by [day]. If you like it, our ${offerName(c.entry)} is ${price(c.entry)}."\n5. Before hanging up, book 15 minutes to show the sample.`}
+  ];
+}
+
+/* ============ lead panel ============ */
+const draft = {}; let channel = "dm";
+function contactRow(label, value, href, copyable){
+  if(!value) return `<dt>${label}</dt><dd class="nf">Not found</dd><span></span>`;
+  const shown = href ? `<a href="${esc(href)}" target="_blank" rel="noopener">${esc(value)}</a>` : esc(value);
+  return `<dt>${label}</dt><dd>${shown}</dd>${copyable?`<button class="mini" type="button" data-copyval="${esc(value)}">Copy</button>`:"<span></span>"}`;
+}
+function renderPanel(){
+  const l = leads.find(x=>x.id===selected); const P = $("#panel");
+  if(!l){ closePanel(); return; }
+  const c = CAMPAIGNS[l.campaign]||CAMPAIGNS.open, p = draft[l.id] || (draft[l.id] = {}), M = messages(l);
+  if(!M.find(m=>m.k===channel)) channel = "dm";
+  const m = M.find(x=>x.k===channel), st = l.status||"Unclaimed";
+  const site = l.website ? (l.website.startsWith("http") ? l.website : "https://"+l.website) : "";
+  const li = "https://www.linkedin.com/search/results/people/?keywords=" + encodeURIComponent(((l.contactName||"").split("&")[0] + " " + l.name).trim());
+  const focusId = document.activeElement && P.contains(document.activeElement) ? document.activeElement.id : null;
+  P.style.setProperty("--cc", `var(${c.color})`);
+  P.innerHTML = `
+    <header><div><div class="eyebrow">${esc(l.where)} · ${esc(l.country)}</div><h2>${esc(l.name)}</h2><div class="muted small" style="margin-top:2px">${esc(l.what)}</div></div><button class="close" id="pclose" aria-label="Close">×</button></header>
+    <div class="pbody">
+      <div class="step"><h3><b>1</b>Who to contact</h3>
+        <dl class="contacts">
+          ${contactRow("Person", [l.contactName, l.contactRole].filter(Boolean).join(", "), "", false)}
+          ${contactRow("Instagram", l.instagram ? "@"+l.instagram : "", l.instagram ? "https://instagram.com/"+l.instagram : "", true)}
+          ${contactRow("Website", l.website, site, false)}
+          ${contactRow("Email", l.email, "", true)}
+          ${contactRow("Phone", l.phone, "", true)}
+          ${contactRow("Address", l.address, "", true)}
+          <dt>LinkedIn</dt><dd><a href="${esc(li)}" target="_blank" rel="noopener">Search for ${esc((l.contactName||"the founder").split("&")[0].trim())}</a></dd><span></span>
+        </dl>
+        <div class="small muted">Start with: <b style="color:var(--ink)">${esc(l.firstTouch||"Instagram DM")}</b>${l.contactNote?` · ${esc(l.contactNote)}`:""}${!l.email?" · No public email found, so check their site's contact page or Instagram bio.":""}</div>
+      </div>
+      <div class="step"><h3><b>2</b>What to pitch</h3>
+        <div class="pitch">
+          <div class="hook">${esc(c.hook)}</div>
+          <dl><dt>Campaign</dt><dd>${esc(c.name)} · ${esc(l.track)} · score ${esc(l.score)}/6</dd>
+          <dt>Their gap</dt><dd>${esc(cap(vars(l).angle))}.</dd>
+          <dt>Free sample</dt><dd>${l.track==="Mass"?"<span class='muted'>Not on the mass track. Lead with the offer.</span>":esc(c.sampleName)+": "+esc(lc(c.sampleDetail))}</dd>
+          <dt>Offer</dt><dd class="mono">${esc(c.entry)}</dd>
+          <dt>Upsell</dt><dd class="mono">${esc(c.full)}</dd></dl>
+        </div>
+      </div>
+      <div class="step"><h3><b>3</b>Copy a message</h3>
+        <div class="fields">
+          <label>Their first name<input id="p-first" value="${esc(p.first ?? (l.contactName ? l.contactName.split(/[ ,&(]/)[0] : ""))}" placeholder="there"></label>
+          <label>Sending as<select id="p-role"><option value="founder" ${me.role==="founder"?"selected":""}>Studio founder</option><option value="partner" ${me.role==="partner"?"selected":""}>Partner</option></select></label>
+          <label>Your name<input id="p-name" value="${esc(me.name)}"></label>
+          <label>Postal address (for emails)<input id="p-addr" value="${esc(me.address)}" placeholder="Required by email law"></label>
+          <label class="wide">Their gap, in your words<textarea id="p-angle" rows="2">${esc(p.angle ?? (l.angle || c.angle))}</textarea></label>
+        </div>
+        <div class="seg" role="group" aria-label="Message type">${M.map(x=>`<button type="button" data-ch="${x.k}" aria-pressed="${x.k===channel}">${x.label}</button>`).join("")}</div>
+        ${m.subject?`<div class="row"><div class="subj" id="p-subj">${esc(m.subject)}</div><button class="mini" type="button" id="copysubj">Copy subject</button></div>`:""}
+        <textarea class="msg" id="p-msg" aria-label="Message">${esc(m.text)}</textarea>
+        <div class="row"><button class="btn" type="button" id="copymsg">Copy message</button><span class="ok" id="p-ok" role="status"></span>${m.k==="li"?`<span class="muted small">${m.text.length}/300 characters</span>`:""}</div>
+      </div>
+      <div class="step"><h3><b>4</b>Track it</h3>
+        <div class="fields">
+          <label>Status<select id="p-status" ${canWrite?"":"disabled"}>${STATUSES.map(s=>`<option ${s===st?"selected":""}>${s}</option>`).join("")}</select></label>
+          <label>Partner<input id="p-partner" value="${esc(l.partner||"")}" placeholder="Nobody yet" ${canWrite?"":"disabled"}></label>
+          <label class="wide">Notes: date · channel · what happened<textarea id="p-notes" rows="3" ${canWrite?"":"disabled"}>${esc(l.notes||"")}</textarea></label>
+        </div>
+        <div class="row">
+          ${st==="Unclaimed"?`<button class="btn" type="button" id="claim" ${canWrite?"":"disabled"}>Claim this lead</button>`:""}
+          <button class="btn ${st==="Unclaimed"?"ghost":""}" type="button" id="save" ${canWrite?"":"disabled"}>Save</button>
+          <span class="ok" id="p-saved" role="status"></span>
+          ${l.sourceUrl?`<a class="small" style="margin-left:auto" href="${esc(l.sourceUrl)}" target="_blank" rel="noopener">Source: ${esc(l.sourceName||"link")}</a>`:""}
+        </div>
+        ${canWrite?"":`<div class="muted small">You can read and copy. Ask the studio for edit access to claim leads.</div>`}
+      </div>
+    </div>`;
+  P.hidden = false; $("#scrim").hidden = false;
+  if(focusId && document.getElementById(focusId)) document.getElementById(focusId).focus();
+}
+function refreshMsg(){
+  const l = leads.find(x=>x.id===selected); if(!l) return;
+  const m = messages(l).find(x=>x.k===channel);
+  $("#p-msg").value = m.text; if($("#p-subj") && m.subject) $("#p-subj").textContent = m.subject;
+}
+function openPanel(id){ selected = id; channel = "dm"; renderPanel(); renderGrid(); $("#pclose") && $("#pclose").focus(); }
+function closePanel(){ const had = selected; selected = null; $("#panel").hidden = true; $("#scrim").hidden = true; renderGrid(); const b = had && document.querySelector(`.card[data-id="${CSS.escape(had)}"]`); b && b.focus(); }
+
+$("#grid").addEventListener("click", e => { const b = e.target.closest(".card"); if(b) openPanel(b.dataset.id); });
+$("#scrim").addEventListener("click", closePanel);
+document.addEventListener("keydown", e => { if(e.key==="Escape" && selected) closePanel(); });
+$("#panel").addEventListener("input", e => {
+  const l = leads.find(x=>x.id===selected); if(!l) return; const p = draft[l.id];
+  const id = e.target.id;
+  if(id==="p-first"){ p.first = e.target.value; refreshMsg(); }
+  if(id==="p-angle"){ p.angle = e.target.value; refreshMsg(); }
+  if(id==="p-name"){ me.name = e.target.value; ls.set("bb-name", me.name); refreshMsg(); }
+  if(id==="p-addr"){ me.address = e.target.value; ls.set("bb-addr", me.address); refreshMsg(); }
+  if(id==="p-role"){ me.role = e.target.value; ls.set("bb-role", me.role); refreshMsg(); }
+});
+$("#panel").addEventListener("click", async e => {
+  if(e.target.id==="pclose") return closePanel();
+  const ch = e.target.closest("[data-ch]"); if(ch){ channel = ch.dataset.ch; renderPanel(); return; }
+  const cv = e.target.closest("[data-copyval]"); if(cv){ await copyText(cv.dataset.copyval); cv.textContent="Copied"; setTimeout(()=>cv.textContent="Copy",1500); return; }
+  if(e.target.id==="copymsg"){ const ok = await copyText($("#p-msg").value, $("#p-msg")); flash($("#p-ok"), ok?"Copied":"Selected. Press Ctrl/Cmd+C"); return; }
+  if(e.target.id==="copysubj"){ await copyText($("#p-subj").textContent); flash($("#p-ok"),"Subject copied"); return; }
+  if(e.target.id==="claim") return save({status:"Claimed", partner: me.name || "Partner", claimedAt: today()});
+  if(e.target.id==="save") return save({status:$("#p-status").value, partner:$("#p-partner").value.trim(), notes:$("#p-notes").value});
+});
+async function save(patch){
+  try{ await store.update(selected, {...patch, updatedAt:new Date().toISOString()}); flash($("#p-saved"),"Saved"); }
+  catch(err){ if(err && err.code==="invalid_argument"){ canWrite=false; renderPanel(); } flash($("#p-saved"),"Couldn't save: "+((err&&err.message)||"try again")); }
+}
+
+/* ============ filters & tabs ============ */
+$("#campchips").addEventListener("click", e => { const b = e.target.closest(".chip"); if(!b) return; fCamp = b.dataset.c; renderChips(); renderGrid(); });
+["#q","#f-track","#f-status","#f-country"].forEach(s => $(s).addEventListener("input", renderGrid));
+$("#f-status").insertAdjacentHTML("beforeend", STATUSES.map(s=>`<option>${s}</option>`).join(""));
+document.querySelectorAll(".tabs button").forEach(b => b.addEventListener("click", () => {
+  document.querySelectorAll(".tabs button").forEach(x=>x.setAttribute("aria-selected", x===b));
+  document.querySelectorAll(".view").forEach(v => v.hidden = v.id !== "v-"+b.dataset.view);
+  window.scrollTo(0,0);
+}));
+
+/* ============ how it works + find leads ============ */
+$("#camptable").innerHTML = ORDER.map(k => { const c = CAMPAIGNS[k]; return `<tr style="--cc:var(${c.color})"><td><span class="dot"></span><b>${c.name}</b></td><td>${esc(c.forWho)}</td><td>${esc(c.hook)}</td><td>${esc(c.sampleName)}</td><td class="mono">${esc(c.entry)}</td><td class="mono">${esc(c.full)}</td></tr>`; }).join("");
+$("#sources").innerHTML = ORDER.map(k => `<div class="src" style="--cc:var(${CAMPAIGNS[k].color})"><h3>${CAMPAIGNS[k].name}</h3>${SOURCES[k].map(([t,q])=>`<div><div class="eyebrow" style="margin-bottom:4px">${esc(t)}</div><div class="q"><code>${esc(q)}</code><button class="mini" type="button" data-copyval="${esc(q)}">Copy</button></div></div>`).join("")}</div>`).join("");
+$("#sources").addEventListener("click", async e => { const b = e.target.closest("[data-copyval]"); if(!b) return; await copyText(b.dataset.copyval); b.textContent="Copied"; setTimeout(()=>b.textContent="Copy",1500); });
+$("#a-camp").innerHTML = ORDER.map(k=>`<option value="${k}">${CAMPAIGNS[k].name}</option>`).join("");
+function addScore(){ const s = +$("#a-fit").value + +$("#a-need").value + +$("#a-time").value; $("#a-score").textContent = s; $("#a-track").textContent = s>=5?"Sample-first":s===4?"Mass":"Park it for now"; return s; }
+["#a-fit","#a-need","#a-time"].forEach(s=>$(s).addEventListener("change", addScore)); addScore();
+$("#addform").addEventListener("submit", async e => {
+  e.preventDefault();
+  const name = $("#a-name").value.trim(); if(!name){ flash($("#a-msg"),"Add the business name first."); $("#a-name").focus(); return; }
+  if(!store){ flash($("#a-msg"),"The board isn't ready yet."); return; }
+  const s = addScore(), src = $("#a-src").value.trim(); let host = ""; try{ host = src ? new URL(src).hostname.replace(/^www\./,"") : ""; }catch(err){}
+  const id = name.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,50)+"-"+Math.random().toString(36).slice(2,6);
+  const doc = {id, name, where:$("#a-where").value.trim(), country:$("#a-country").value, what:$("#a-what").value.trim(), campaign:$("#a-camp").value,
+    track: s>=5?"Sample-first":"Mass", score:s, firstTouch:$("#a-touch").value, angle:$("#a-angle").value.trim(),
+    instagram:$("#a-ig").value.trim().replace(/^@/,""), website:$("#a-web").value.trim().replace(/^https?:\/\//,"").replace(/\/$/,""), phone:$("#a-phone").value.trim(), email:$("#a-email").value.trim(),
+    contactName:$("#a-cname").value.trim(), contactRole:$("#a-crole").value.trim(), address:"", contactNote:"",
+    sourceName:host, sourceUrl:src, status: s>=4?"Unclaimed":"House", partner:"", notes: s<4?"Parked: score under 4":"", addedBy: me.name||"", addedAt: today(), contactsChecked: today()};
+  try{ await store.add(doc); flash($("#a-msg"), `${name} added.`); e.target.reset(); addScore(); }
+  catch(err){ flash($("#a-msg"), "Couldn't add it: "+((err&&err.message)||"try again")); }
+});
+$("#exportbtn").addEventListener("click", () => { const blob = new Blob([store.exportJSON()],{type:"application/json"}); const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "leads-"+today()+".json"; a.click(); flash($("#localmsg"),"Exported"); });
+$("#importfile").addEventListener("change", async e => { const f = e.target.files[0]; if(!f) return; try{ const arr = JSON.parse(await f.text()); if(!Array.isArray(arr)) throw new Error("not a list"); store.importJSON(arr); flash($("#localmsg"), arr.length+" leads imported"); }catch(err){ flash($("#localmsg"),"That file isn't a leads export."); } e.target.value=""; });
+$("#resetbtn").addEventListener("click", e => { if(e.target.dataset.sure){ store.reset(); delete e.target.dataset.sure; e.target.textContent="Reset to the starting 35"; flash($("#localmsg"),"Reset done"); } else { e.target.dataset.sure="1"; e.target.textContent="Click again to reset (your changes will be lost)"; } });
+
+/* ============ boot ============ */
+(async () => {
+  try{
+    store = await artifactStore();
+    if(!store){ const s = await supabaseStore(); if(s==="signin") return; store = s; }
+  }catch(err){ console.warn(err); store = null; }
+  if(!store) store = localStore();
+  $("#mode").textContent = store.label; if(store.shared) $("#mode").classList.add("shared");
+  store.start();
+})();
+})();
+</script>
+
+</body>
+</html>
